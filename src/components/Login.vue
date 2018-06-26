@@ -15,10 +15,15 @@
               id="name"
               type="name"
               v-model="name"
+              v-bind:disabled="currentUser != null"
               required></v-text-field>
           </v-flex>
           <v-flex class="text-xs-center">
-            <v-btn color="primary" type="submit" v-on:click="SignIn">Log In</v-btn>
+            <v-btn color="primary"
+              type="submit"
+              v-on:click="SignIn"
+              v-bind:disabled="currentUser != null"
+              >Log In</v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
