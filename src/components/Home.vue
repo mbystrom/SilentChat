@@ -42,9 +42,14 @@ export default {
     list-style-type: none;
     font-size: 1.25em;
   }
+<<<<<<< HEAD
   li {
     background: white;
     padding: 1rem 1.5rem;
     display: inline-block;
+=======
+  ul li {
+    border: 3px solid black;
+>>>>>>> 237ad6cd0bba0c36bc1c75ab8e76defea6fd8dcb
   }
 </style>
