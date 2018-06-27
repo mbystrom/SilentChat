@@ -12,6 +12,20 @@
             <small>{{ ParseDate(message.time) }}</small>
           </span>
         </div>
+        <br>
+      </v-flex>
+    </v-layout>
+    <v-layout row align-baseline>
+      <v-flex xs11 sm8 md6 offset-sm2 offset-md3>
+        <v-text-field v-model="text"></v-text-field>
+      </v-flex>
+      <v-flex xs2 ml-1>
+        <span v-if="text != '' && text != ' '">
+          <v-icon color="blue" class="send-active" @click="SendMessage">send</v-icon>
+        </span>
+        <span v-else>
+          <v-icon>send</v-icon>
+        </span>
       </v-flex>
     </v-layout>
   </v-container>
@@ -26,9 +40,10 @@ export default {
     return {
       messages: [
         { text: 'this is a message', sender: 'penelope', time: date },
-        { text: 'a message', sender: 'naiomi', time: date },
-        { text: 'a rather much longer one', sender: 'penelope', time: date }
-      ]
+        { text: 'another message', sender: 'naiomi', time: date },
+        { text: 'a rather much longer message', sender: 'penelope', time: date }
+      ],
+      text: ''
     }
   },
   methods: {
@@ -43,6 +58,9 @@ export default {
       } else {
         return false
       }
+    },
+    SendMessage () {
+      return 0
     }
   },
   computed: {
@@ -71,5 +89,8 @@ export default {
     background: lightgrey;
     text-align: right;
     float: right;
+  }
+  .send-active {
+    cursor: pointer;
   }
 </style>
