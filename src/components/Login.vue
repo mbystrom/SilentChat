@@ -16,10 +16,10 @@
               type="name"
               v-model="name"
               v-bind:disabled="currentUser != null"
-              required></v-text-field>
+              ></v-text-field>
           </v-flex>
           <v-flex class="text-xs-center">
-            <v-btn color="primary"
+            <v-btn color="secondary"
               type="submit"
               v-on:click="SignIn"
               v-bind:disabled="currentUser != null"
@@ -51,8 +51,16 @@ export default {
       'SetUser'
     ]),
     SignIn () {
-      this.SetUser(this.name)
-      this.name = ''
+      if (this.name !== '' && this.name !== ' ') {
+        if (this.name[0] === ' ') {
+          var n = this.name.replace(/ /g, 'invalidcharacter')
+          this.SetUser(n)
+          this.name = ''
+          return null
+        }
+        this.SetUser(this.name)
+        this.name = ''
+      }
     }
   }
 }
