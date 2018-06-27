@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
-      <v-flex xs12 class="text-xs-center" mt-5>
+      <v-flex xs12 class="text-xs-center" mt-2>
         <h1>Welcome to {{ appName }}</h1>
       </v-flex>
       <v-flex xs12 sm8 md6 offset-sm2 offset-md3 class="text-xs-center">
@@ -17,11 +17,11 @@
     </v-layout>
     <v-layout row align-baseline>
       <v-flex xs11 sm8 md6 offset-sm2 offset-md3>
-        <v-text-field v-model="text"></v-text-field>
+        <v-text-field v-model="text" :disabled="!LoggedIn()"></v-text-field>
       </v-flex>
       <v-flex xs2 ml-1>
         <span v-if="text != '' && text != ' '">
-          <v-icon color="blue darken -5" class="send-active" @click="SendMessage">send</v-icon>
+          <v-icon color="blue darken -5" class="send-active" @click="SendMessage()">send</v-icon>
         </span>
         <span v-else>
           <v-icon>send</v-icon>
@@ -59,8 +59,23 @@ export default {
         return false
       }
     },
+    // this needs to be modified to push to a database and pull back from it
     SendMessage () {
-      return 0
+      if (this.LoggedIn()) {
+        var date = new Date()
+        var data = { text: this.text, sender: this.user, time: date }
+        this.messages.push(data)
+        console.log('pushing data: ' + data)
+      }
+      this.text = ''
+    },
+    LoggedIn () {
+      if (this.user != null && this.user !== '') {
+        if (!this.user.includes('invalidcharacter')) {
+          return true
+        }
+      }
+      return false
     }
   },
   computed: {
