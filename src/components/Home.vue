@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-layout row wrap>
       <v-flex xs12 class="text-xs-center" mt-5>
-        <h1>Home Page for the Chat App</h1>
+        <h1>Welcome to {{ appName }}</h1>
       </v-flex>
       <v-flex xs12 sm8 md6 offset-sm2 offset-md3 class="text-xs-center">
         <div class="row">
@@ -21,7 +21,7 @@
       </v-flex>
       <v-flex xs2 ml-1>
         <span v-if="text != '' && text != ' '">
-          <v-icon color="blue" class="send-active" @click="SendMessage">send</v-icon>
+          <v-icon color="blue darken -5" class="send-active" @click="SendMessage">send</v-icon>
         </span>
         <span v-else>
           <v-icon>send</v-icon>
@@ -65,7 +65,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'user'
+      'user',
+      'appName'
     ])
   }
 }
@@ -81,12 +82,12 @@ export default {
     clear: both;
   }
   .received-message {
-    background: white;
+    background: #505050;
     text-align: left;
     float: left;
   }
   .user-message {
-    background: lightgrey;
+    background: #666;
     text-align: right;
     float: right;
   }
