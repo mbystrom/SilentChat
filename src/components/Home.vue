@@ -17,7 +17,9 @@
     </v-layout>
     <v-layout row align-baseline>
       <v-flex xs11 sm8 md6 offset-sm2 offset-md3>
-        <v-text-field v-model="text" :disabled="!LoggedIn()"></v-text-field>
+        <form v-on:submit.prevent="SendMessage()">
+          <v-text-field v-model="text" :disabled="!LoggedIn()"></v-text-field>
+        </form>
       </v-flex>
       <v-flex xs2 ml-1>
         <span v-if="text != '' && text != ' '">
