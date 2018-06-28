@@ -6,9 +6,11 @@
       </v-flex>
       <v-flex xs12 sm8 md6 offset-sm2 offset-md3 class="text-xs-center">
         <div class="row">
-          <span :class="{ 'message user-message': isUser(message.sender), 'message received-message': !isUser(message.Sender) }" v-for="message in messages" :key="message.message">
+          <span v-for="(message, index) in messages"
+           :key="index"
+           :class="{ 'message user-message': isUser(message.sender), 'message received-message': !isUser(message.sender) }">
             <small><b>{{ message.sender }}</b></small><br>
-            {{ message.text }} <br>
+            {{ message.message }} <br>
             <small>{{ ParseDate(message.time) }}</small>
           </span>
         </div>
@@ -33,22 +35,23 @@
 
 <script>
 import { mapState } from 'vuex'
+import axios from 'axios'
 
 export default {
   data () {
     var date = new Date()
     return {
       messages: [
-        { text: 'this is a message', sender: 'penelope', time: date },
-        { text: 'another message', sender: 'naiomi', time: date },
-        { text: 'a rather much longer message', sender: 'penelope', time: date }
+        { message: 'this is a message', sender: 'penelope', time: date },
+        { message: 'another message', sender: 'naiomi', time: date },
+        { message: 'a rather much longer message', sender: 'penelope', time: date }
       ],
       text: ''
     }
   },
   methods: {
     ParseDate (date) {
-      var d = date.toISOString().slice(0, 16).replace('T', ' ')
+      var d = date.toString().slice(0, 16).replace('T', ' ')
       d = d.replace(/-/g, '/')
       return d
     },
@@ -59,16 +62,6 @@ export default {
         return false
       }
     },
-    // this needs to be modified to push to a database and pull back from it
-    SendMessage () {
-      if (this.LoggedIn()) {
-        var date = new Date()
-        var data = { text: this.text, sender: this.user, time: date }
-        this.messages.push(data)
-        console.log('pushing data: ' + data)
-      }
-      this.text = ''
-    },
     LoggedIn () {
       if (this.user != null && this.user !== '') {
         if (!this.user.includes('invalidcharacter')) {
@@ -76,7 +69,43 @@ export default {
         }
       }
       return false
+    },
+
+    // FUNCTIONS FOR DATABASE MANIPULATION
+    GetMessages () {
+      axios({
+        method: 'get',
+        url: 'http://dataservicedev/noah_Test/test.cfc?method=getMessages'
+      }).then(response => {
+        console.log(response)
+        for (var i = 0; i < response.data.length; i++) {
+          var dataToPush = response.data[i]
+          this.messages.push(dataToPush)
+        }
+        console.log(this.messages)
+      })
+    },
+    SendMessage () {
+      if (this.LoggedIn()) {
+        var date = new Date()
+        var data = { message: this.text, sender: this.user, time: date }
+        let formdata = new FormData()
+        formdata.append('json', JSON.stringify(data))
+        axios({
+          method: 'post',
+          url: 'http://dataservicedev/noah_Test/test.cfc?method=sendMessage',
+          data: formdata
+        }).then(response => {
+          this.GetMessages()
+        })
+        // this.messages.push(data)
+        console.log('pushing data: ' + data)
+      }
+      this.text = ''
     }
+  },
+  created: function () {
+    this.GetMessages()
   },
   computed: {
     ...mapState([
