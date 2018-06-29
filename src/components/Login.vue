@@ -30,6 +30,10 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <v-footer fixed>
+      <v-spacer></v-spacer>
+      <div><router-link to='/data'>We collect as little data as possible </router-link>&nbsp;</div>
+    </v-footer>
   </v-container>
 </template>
 
