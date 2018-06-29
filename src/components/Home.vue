@@ -90,6 +90,7 @@ export default {
 </script>
 
 <style>
+  /* message styles */
   .message {
     font-size: 1.2em;
     padding: 1rem 1.5rem;
@@ -111,5 +112,19 @@ export default {
   }
   .send-active {
     cursor: pointer;
+  }
+
+  /* scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #303030;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #505050;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #666;
   }
 </style>

@@ -18,7 +18,7 @@
                 v-model="name"
                 v-bind:disabled="currentUser != null"
                 ></v-text-field>
-              </form>
+            </form>
           </v-flex>
           <v-flex class="text-xs-center">
             <v-btn color="secondary"
