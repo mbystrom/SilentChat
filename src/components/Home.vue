@@ -1,21 +1,17 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
-      <v-flex xs12 class="text-xs-center" mt-2>
-        <h1>Welcome to {{ appName }}</h1>
-      </v-flex>
-      <v-flex xs12 sm8 md6 offset-sm2 offset-md3 class="text-xs-center">
-        <div class="row">
-          <span :class="{ 'message user-message': isUser(message.sender), 'message received-message': !isUser(message.Sender) }" v-for="message in messages" :key="message.message">
-            <small><b>{{ message.sender }}</b></small><br>
-            {{ message.text }} <br>
-            <small>{{ ParseDate(message.time) }}</small>
-          </span>
-        </div>
-        <br>
+      <v-flex xs12 sm8 md6 offset-sm2 offset-md3 class="text-xs-center scrollable">
+        <span v-for="(message, index) in messages"
+          :key="index"
+          :class="{ 'message user-message': isUser(message.sender), 'message received-message': !isUser(message.sender) }">
+          <small><b>{{ message.sender }}</b></small><br>
+          {{ message.text }} <br>
+          <small>{{ ParseDate(message.time) }}</small>
+        </span>
       </v-flex>
     </v-layout>
-    <v-layout row align-baseline>
+    <v-layout row align-baseline ma-0 pa-0>
       <v-flex xs11 sm8 md6 offset-sm2 offset-md3>
         <form v-on:submit.prevent="SendMessage()">
           <v-text-field v-model="text" :disabled="!LoggedIn()"></v-text-field>
@@ -89,7 +85,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   /* message styles */
   .message {
     font-size: 1.2em;
@@ -126,5 +122,25 @@ export default {
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #666;
+  }
+
+  /* scrollable item styles */
+  @media (min-height: 1000px){
+    .scrollable {
+      height: 84vh;
+      overflow-y: auto;
+    }
+  }
+  @media (max-height: 999px) {
+    .scrollable {
+      height: 74vh;
+      overflow-y: auto;
+    }
+  }
+  @media (max-height: 600px) {
+    .scrollable {
+      height: 70vh;
+      overflow-y: auto;
+    }
   }
 </style>
