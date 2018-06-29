@@ -111,9 +111,6 @@ export default {
   }
 
   /* scrollbar styles */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
   ::-webkit-scrollbar-track {
     background: #303030;
   }
@@ -130,17 +127,26 @@ export default {
       height: 84vh;
       overflow-y: auto;
     }
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
   }
   @media (max-height: 999px) {
     .scrollable {
       height: 74vh;
       overflow-y: auto;
     }
+    ::-webkit-scrollbar {
+      width: 3px;
+    }
   }
   @media (max-height: 600px) {
     .scrollable {
       height: 70vh;
       overflow-y: auto;
+    }
+    ::-webkit-scrollbar {
+      width: 2px;
     }
   }
 </style>
