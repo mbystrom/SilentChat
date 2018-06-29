@@ -94,6 +94,7 @@ export default {
     font-size: 1.2em;
     padding: 1rem 1.5rem;
     margin: 5px;
+    border-radius: 5px;
     display: table;
     position: relative;
     clear: both;

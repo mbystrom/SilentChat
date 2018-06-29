@@ -9,14 +9,16 @@
       <v-flex xs12 sm6 offset-sm3 mt-3>
         <v-layout column>
           <v-flex>
-            <v-text-field
-              name="Name"
-              label="Your Name"
-              id="name"
-              type="name"
-              v-model="name"
-              v-bind:disabled="currentUser != null"
-              ></v-text-field>
+            <form @submit.prevent="SignIn">
+              <v-text-field
+                name="Name"
+                label="Your Name"
+                id="name"
+                type="name"
+                v-model="name"
+                v-bind:disabled="currentUser != null"
+                ></v-text-field>
+              </form>
           </v-flex>
           <v-flex class="text-xs-center">
             <v-btn color="secondary"
