@@ -46,8 +46,8 @@ export default {
   },
   methods: {
     ParseDate (date) {
-      var d = date.toISOString().slice(0, 16).replace('T', ' ')
-      d = d.replace(/-/g, '/')
+      var d = date.toString().slice(0, 21)
+      // d = d.replace(/-/g, '/')
       return d
     },
     isUser (sender) {
@@ -91,7 +91,7 @@ export default {
     font-size: 1.2em;
     padding: 1rem 1.5rem;
     margin: 5px;
-    border: 2px solid #292929;
+    border: 2px solid #292929; /* may want to remove this, actually */
     border-radius: 5px;
     display: table;
     position: relative;
