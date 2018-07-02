@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
-      <v-flex xs12 sm8 md6 offset-sm2 offset-md3 class="text-xs-center scrollable">
+      <v-flex xs12 sm8 md6 offset-sm2 mb-5 offset-md3 class="text-xs-center">
         <span v-for="(message, index) in messages"
           :key="index"
           :class="{ 'message user-message': isUser(message.sender), 'message received-message': !isUser(message.sender) }">
@@ -11,21 +11,23 @@
         </span>
       </v-flex>
     </v-layout>
-    <v-layout row align-baseline ma-0 pa-0>
-      <v-flex xs11 sm8 md6 offset-sm2 offset-md3>
-        <form v-on:submit.prevent="SendMessage()">
-          <v-text-field v-model="text" :disabled="!LoggedIn()"></v-text-field>
-        </form>
-      </v-flex>
-      <v-flex xs2 ml-1>
-        <span v-if="text != '' && text != ' '">
-          <v-icon color="blue darken -5" class="send-active" @click="SendMessage()">send</v-icon>
-        </span>
-        <span v-else>
-          <v-icon>send</v-icon>
-        </span>
-      </v-flex>
-    </v-layout>
+    <v-footer fixed height="4rem">
+      <v-layout row align-baseline ma-0 pa-0>
+        <v-flex xs11 sm8 md6 offset-sm2 offset-md3>
+          <form v-on:submit.prevent="SendMessage()">
+            <v-text-field v-model="text" :disabled="!LoggedIn()"></v-text-field>
+          </form>
+        </v-flex>
+        <v-flex xs2 ml-1>
+          <span v-if="text != '' && text != ' '">
+            <v-icon color="blue darken -5" class="send-active" @click="SendMessage()">send</v-icon>
+          </span>
+          <span v-else>
+            <v-icon>send</v-icon>
+          </span>
+        </v-flex>
+      </v-layout>
+    </v-footer>
   </v-container>
 </template>
 
@@ -66,6 +68,9 @@ export default {
         console.log('pushing data: ' + data)
       }
       this.text = ''
+      this.$nextTick(function () {
+        window.scrollTo(0, document.body.scrollHeight)
+      })
     },
     LoggedIn () {
       if (this.user != null && this.user !== '') {
@@ -124,28 +129,16 @@ export default {
 
   /* scrollable item styles */
   @media (min-height: 1000px){
-    .scrollable {
-      height: 84vh;
-      overflow-y: auto;
-    }
     ::-webkit-scrollbar {
       width: 5px;
     }
   }
   @media (max-height: 999px) {
-    .scrollable {
-      height: 74vh;
-      overflow-y: auto;
-    }
     ::-webkit-scrollbar {
       width: 3px;
     }
   }
   @media (max-height: 600px) {
-    .scrollable {
-      height: 70vh;
-      overflow-y: auto;
-    }
     ::-webkit-scrollbar {
       width: 2px;
     }
