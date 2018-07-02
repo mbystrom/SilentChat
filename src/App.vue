@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer class="hidden-sm-and-up" v-model="sidenav" absolute="true">
+    <v-navigation-drawer class="hidden-sm-and-up" v-model="sidenav" fixed>
       <v-list>
         <v-list-tile v-for="item in menu" :key="item.title" :to="item.path">
           <v-list-tile-action>

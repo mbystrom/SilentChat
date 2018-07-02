@@ -13,7 +13,7 @@
     </v-layout>
     <v-footer fixed height="4rem">
       <v-layout row align-baseline ma-0 pa-0>
-        <v-flex xs11 sm8 md6 offset-sm2 offset-md3>
+        <v-flex xs10 sm8 md6 offset-xs1 offset-sm2 offset-md3>
           <form v-on:submit.prevent="SendMessage()">
             <v-text-field v-model="text" :disabled="!LoggedIn()"></v-text-field>
           </form>
