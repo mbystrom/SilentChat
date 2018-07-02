@@ -13,6 +13,9 @@
           By using this website, you are giving explicit permission for us to collect your username and messages. <br>
           We will not collect any other information.
         </p>
+        <p>
+          <router-link to="/login">Back to Login</router-link>
+        </p>
       </v-flex>
     </v-layout>
   </v-container>

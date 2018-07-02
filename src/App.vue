@@ -76,4 +76,15 @@ export default {
     top: 50%;
     transform: translateY(-50%);
   }
+  a, a:link, a:visited {
+    text-decoration: none;
+    color: white;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  a:active {
+    text-decoration: underline;
+    color: darkgray;
+  }
 </style>
