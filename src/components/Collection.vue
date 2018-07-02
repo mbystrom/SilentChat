@@ -14,7 +14,7 @@
           We will not collect any other information.
         </p>
         <p>
-          <router-link to="/login">Back to Login</router-link>
+          <router-link class="ln" to="/login">Back to Login</router-link>
         </p>
       </v-flex>
     </v-layout>

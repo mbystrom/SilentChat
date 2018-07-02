@@ -15,6 +15,8 @@
                 label="Your Name"
                 id="name"
                 type="name"
+                browser-autocomplete="off"
+                autocomplete="off"
                 v-model="name"
                 v-bind:disabled="currentUser != null"
                 ></v-text-field>
@@ -32,7 +34,7 @@
     </v-layout>
     <v-footer fixed>
       <v-spacer></v-spacer>
-      <div><router-link to='/data'>We collect as little data as possible </router-link>&nbsp;</div>
+      <div><router-link class="ln" to='/data'>We collect as little data as possible </router-link>&nbsp;</div>
     </v-footer>
   </v-container>
 </template>
@@ -57,13 +59,7 @@ export default {
       'SetUser'
     ]),
     SignIn () {
-      if (this.name !== '' && this.name !== ' ') {
-        if (this.name[0] === ' ') {
-          var n = this.name.replace(/ /g, 'invalidcharacter')
-          this.SetUser(n)
-          this.name = ''
-          return null
-        }
+      if (this.name !== '' && this.name.indexOf(' ') < 0) {
         this.SetUser(this.name)
         this.name = ''
       }
